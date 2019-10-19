@@ -15,5 +15,6 @@ add_definitions(-DMQTTCLIENT_PLATFORM_HEADER=MQTTLinux.h)
 include_directories(fsw/src)
 include_directories(fsw/tables)
 aux_source_directory(fsw/tables APP_TBL_FILES)
-add_cfe_tables(mqtt ${APP_TBL_FILES})
+add_cfe_tables(sampleTable fsw/tables/mqtt2sb.c)
+
 
