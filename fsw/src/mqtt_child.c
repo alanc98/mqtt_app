@@ -344,7 +344,8 @@ void MQTT_ChildMqttLoop(void)
                                    MQTT_DEFAULT_SERVER_PASSWORD);
     if (result != CFE_SUCCESS) 
     {
-       OS_printf("MQTT_ClientInitialize Failed!\n");
+       OS_printf("MQTT_ClientInitialize Failed - Entering Child Idle Loop!\n");
+       MQTT_ChildIdleLoop();
     }
     else
     {

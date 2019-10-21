@@ -72,11 +72,18 @@ int32 MQTT_ClientInitialize(char *hostname, int port,
     ** Connect to MQTT server
     */
     printf("Connecting to %s %d\n", hostname, port);
-
     rc = MQTTConnect(&MQTT_ClientStruct, &MQTT_ConnectData);
-    printf("Connected %d\n", rc);
 
-    return(CFE_SUCCESS);
+    if (rc == SUCCESS)
+    {
+       printf(" Connected %d\n", rc);
+       return(CFE_SUCCESS);
+    }
+    else
+    {
+       printf(" Connect failed %d\n", rc);
+       return(rc);
+    }
 
 } /* End of MQTT_ClientInitialize() */
 
@@ -117,8 +124,20 @@ int32 MQTT_ClientSubscribe(char *topic, int qos)
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void MQTT_ClientYeild(unsigned int timeout)
 {
-    MQTTYield(&MQTT_ClientStruct, timeout);
+    int rc;
 
+    rc = MQTTYield(&MQTT_ClientStruct, timeout);
+
+    /*
+    ** If the call fails, there is no timeout
+    ** so we will delay to keep the task from spinning
+    */
+    if (rc != SUCCESS)
+    {
+       OS_printf("MQTT: Error from Yield\n");
+       OS_TaskDelay(timeout);
+    }
+    
 } /* End of MQTT_ClientYield() */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
