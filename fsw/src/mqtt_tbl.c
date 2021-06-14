@@ -184,7 +184,9 @@ int32 MQTT_ValidateMqtt2SbTable(void* table)
 *******************************************************************************/
 void MQTT_ManageTableCmd(CFE_SB_MsgPtr_t pCmdMsg)
 {
+#if 0
     int32 Status = CFE_SUCCESS;
+#endif
 
     if (MQTT_VerifyCmdLength(pCmdMsg, sizeof(CFE_TBL_NotifyCmd_t)))
     {

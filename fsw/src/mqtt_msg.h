@@ -44,7 +44,7 @@ typedef struct
     uint8              mqtt_command_count;
     uint16             mqtt_child_task_counter;
 
-}   OS_PACK mqtt_hk_tlm_t  ;
+}   mqtt_hk_tlm_t  ;
 #define MQTT_HK_TLM_LNGTH   sizeof ( mqtt_hk_tlm_t )
 
 /******************************************************************************/

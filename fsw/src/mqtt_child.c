@@ -258,7 +258,7 @@ void MQTT_ClientMessageCallback(MessageData* md)
     #ifdef MQTT_DEBUG
         OS_printf("In MQTT Message received callback\n");
         OS_printf("   Topic length: %d\n",md->topicName->lenstring.len);
-        OS_printf("   Payload length: %d\n",message->payloadlen);
+        OS_printf("   Payload length: %ld\n",message->payloadlen);
         OS_printf("%.*s\t", md->topicName->lenstring.len, md->topicName->lenstring.data);
         OS_printf("%.*s\n", (int)message->payloadlen, (char*)message->payload);
     #endif
@@ -337,9 +337,9 @@ void MQTT_ChildMqttLoop(void)
     ** Initialize the MQTT client. 
     ** These parameters are in the platform config file for the app
     */
-    result = MQTT_ClientInitialize(MQTT_DEFAULT_SERVER_ADDRESS,
+    result = MQTT_ClientInitialize((char *)MQTT_DEFAULT_SERVER_ADDRESS,
                                    MQTT_DEFAULT_SERVER_PORT,
-                                   MQTT_DEFAULT_CLIENT_NAME,
+                                   (char *)MQTT_DEFAULT_CLIENT_NAME,
                                    MQTT_DEFAULT_SERVER_USERNAME,
                                    MQTT_DEFAULT_SERVER_PASSWORD);
     if (result != CFE_SUCCESS) 
