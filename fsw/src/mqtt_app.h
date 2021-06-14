@@ -114,6 +114,7 @@ int32  MQTT_ValidateMqtt2SbTable(void* table);
 ** Child task function(s)
 */
 int32  MQTT_CreateChildTask(void);
+void   MQTT_ChildIdleLoop(void);
 
 /*
 ** MQTT Client functions
